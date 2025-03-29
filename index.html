@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WebEssence - Soluções digitais profissionais para empresas. Desenvolvimento web, e-commerce, SEO e design responsivo.">
+    <title>WebEssence - Soluções Digitais Profissionais</title>
+    <!-- Adicionando fonte Poppins do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS minificado e separado para melhor organização -->
+    <style>
+        /* Reset e estilos gerais */
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+        body{line-height:1.6;color:#333;overflow-x:hidden}
+        a{text-decoration:none;color:inherit}
+        ul{list-style:none}
+        img{max-width:100%;height:auto}
+        .container{width:85%;max-width:1200px;margin:0 auto;padding:0 15px}
+        
+        /* Botões */
+        .btn{display:inline-block;padding:12px 24px;background:#3498db;color:white;border-radius:4px;font-weight:600;transition:all 0.3s ease}
+        .btn:hover{background:#2980b9;transform:translateY(-2px);box-shadow:0 4px 8px rgba(0,0,0,0.1)}
+        .btn-primary{background:#3498db}
+        .btn-secondary{background:transparent;border:2px solid #3498db;color:#3498db}
+        .btn-secondary:hover{background:#3498db;color:white}
+        
+        /* Seções */
+        section{padding:80px 0}
+        .section-title{text-align:center;margin-bottom:50px;position:relative}
+        .section-title h2{font-size:2.5rem;margin-bottom:15px;color:#2c3e50}
+        .section-title p{max-width:700px;margin:0 auto;color:#7f8c8d}
+        .section-title::after{content:'';display:block;width:80px;height:3px;background:#3498db;margin:15px auto 0}
+        
+        /* Animações */
+        @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        .fade-in{animation:fadeIn 0.8s ease forwards;opacity:0}
+        
+        /* Header */
+        header{background:white;box-shadow:0 2px 10px rgba(0,0,0,0.1);position:fixed;width:100%;top:0;z-index:1000}
+        .header-container{display:flex;justify-content:space-between;align-items:center;padding:15px 0}
+        .logo{font-size:1.8rem;font-weight:700;color:#2c3e50}
+        .logo span{color:#3498db}
+        nav ul{display:flex;gap:30px}
+        nav ul li a{font-weight:500;transition:color 0.3s ease}
+        nav ul li a:hover,nav ul li a.active{color:#3498db}
+        .mobile-menu-btn{display:none;font-size:1.5rem;cursor:pointer}
+        
+        /* Hero Section */
+        .hero{height:100vh;display:flex;align-items:center;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80') no-repeat center center;background-size:cover;margin-top:70px;color:white}
+        .hero-content{max-width:650px}
+        .hero-content h1{font-size:3.5rem;line-height:1.2;margin-bottom:20px;color:white}
+        .hero-content h1 span{color:#3498db}
+        .hero-content p{font-size:1.2rem;margin-bottom:30px;color:#f5f5f5}
+        .hero-btns{display:flex;gap:15px}
+        
+        /* Services */
+        .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
+        .service-card{background:white;border-radius:8px;padding:30px;box-shadow:0 5px 15px rgba(0,0,0,0.05);transition:all 0.3s ease;text-align:center}
+        .service-card:hover{transform:translateY(-10px);box-shadow:0 15px 30px rgba(0,0,0,0.1)}
+        .service-icon{font-size:3rem;color:#3498db;margin-bottom:20px}
+        .service-title{font-size:1.5rem;margin-bottom:15px;color:#2c3e50}
+        
+        /* Portfolio */
+        .portfolio{background:#f9f9f9}
+        .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:30px}
+        .portfolio-item{border-radius:8px;overflow:hidden;position:relative;box-shadow:0 5px 15px rgba(0,0,0,0.05)}
+        .portfolio-img{width:100%;height:250px;object-fit:cover;transition:transform 0.5s ease}
+        .portfolio-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(52,152,219,0.9);display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;transition:opacity 0.5s ease;color:white;text-align:center;padding:20px}
+        .portfolio-item:hover .portfolio-overlay{opacity:1}
+        .portfolio-item:hover .portfolio-img{transform:scale(1.1)}
+        .portfolio-overlay h3{font-size:1.5rem;margin-bottom:10px}
+        .portfolio-overlay p{margin-bottom:15px}
+        
+        /* Testimonials */
+        .testimonials{background:white}
+        .testimonial-container{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:30px;padding-bottom:30px}
+        .testimonial-container::-webkit-scrollbar{height:10px}
+        .testimonial-container::-webkit-scrollbar-track{background:#f1f1f1;border-radius:10px}
+        .testimonial-container::-webkit-scrollbar-thumb{background:#3498db;border-radius:10px}
+        .testimonial{min-width:350px;scroll-snap-align:start;background:white;border-radius:8px;padding:30px;box-shadow:0 5px 15px rgba(0,0,0,0.05)}
+        .testimonial-header{display:flex;align-items:center;margin-bottom:20px}
+        .testimonial-img{width:60px;height:60px;border-radius:50%;object-fit:cover;margin-right:15px}
+        .testimonial-author h4{margin-bottom:5px;color:#2c3e50}
+        .testimonial-author p{color:#7f8c8d;font-size:0.9rem}
+        .testimonial-stars{color:#f1c40f;margin-bottom:15px}
+        .testimonial-content{color:#7f8c8d;font-style:italic;line-height:1.7}
+        
+        /* About */
+        .about{background:#f9f9f9}
+        .about-container{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+        .about-img{width:100%;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,0.1)}
+        .about-content h2{font-size:2.5rem;margin-bottom:20px;color:#2c3e50}
+        .about-content p{margin-bottom:20px;color:#7f8c8d}
+        
+        /* Contact */
+        .contact-container{display:grid;grid-template-columns:1fr 1fr;gap:50px}
+        .contact-info h3{font-size:1.8rem;margin-bottom:30px;color:#2c3e50}
+        .contact-info-item{display:flex;align-items:flex-start;margin-bottom:25px}
+        .contact-icon{font-size:1.5rem;color:#3498db;margin-right:15px}
+        .contact-details h4{margin-bottom:5px;color:#2c3e50}
+        .contact-details p,.contact-details a{color:#7f8c8d}
+        .contact-form h3{font-size:1.8rem;margin-bottom:30px;color:#2c3e50}
+        .form-group{margin-bottom:20px}
+        .form-control{width:100%;padding:12px 15px;border:1px solid #e1e1e1;border-radius:4px;font-size:1rem;transition:border-color 0.3s ease}
+        .form-control:focus{outline:none;border-color:#3498db}
+        textarea.form-control{resize:vertical;min-height:150px}
+        
+        /* Footer */
+        footer{background:#2c3e50;color:white;padding:60px 0 30px}
+        .footer-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-bottom:40px}
+        .footer-col h4{font-size:1.2rem;margin-bottom:20px;position:relative;padding-bottom:10px}
+        .footer-col h4::after{content:'';position:absolute;left:0;bottom:0;width:40px;height:2px;background:#3498db}
+        .footer-links li{margin-bottom:10px}
+        .footer-links a{color:#bdc3c7;transition:color 0.3s ease}
+        .footer-links a:hover{color:#3498db;padding-left:5px}
+        .footer-social{display:flex;gap:15px}
+        .social-icon{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;background:rgba(255,255,255,0.1);border-radius:50%;color:white;transition:all 0.3s ease}
+        .social-icon:hover{background:#3498db;transform:translateY(-3px)}
+        .footer-bottom{text-align:center;padding-top:30px;border-top:1px solid rgba(255,255,255,0.1);color:#bdc3c7;font-size:0.9rem}
+        
+        /* Responsividade */
+        @media (max-width:991px){.about-container,.contact-container{grid-template-columns:1fr}.hero-content h1{font-size:2.8rem}}
+        @media (max-width:768px){nav ul{position:absolute;top:100%;left:0;width:100%;background:white;flex-direction:column;gap:0;height:0;overflow:hidden;transition:all 0.3s ease;box-shadow:0 10px 10px rgba(0,0,0,0.1)}nav.active ul{height:auto;padding:20px 0}nav ul li{width:100%;text-align:center}nav ul li a{display:block;padding:10px}.mobile-menu-btn{display:block}.hero-content h1{font-size:2.5rem}}
+        @media (max-width:576px){.hero-content h1{font-size:2rem}.hero-btns{flex-direction:column;gap:10px}.section-title h2{font-size:2rem}.portfolio-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">Web<span>Essence</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Início</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#portfolio">Portfólio</a></li>
+                    <li><a href="#about">Sobre Nós</a></li>
+                    <li><a href="#testimonials">Depoimentos</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+                <div class="mobile-menu-btn">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with background image -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>Transformando <span>Ideias</span> em Experiências Digitais</h1>
+                <p>Soluções web personalizadas para impulsionar seu negócio. Design responsivo, otimização para SEO e resultados que convertem.</p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn btn-primary">Solicitar Orçamento</a>
+                    <a href="#portfolio" class="btn btn-secondary">Ver Projetos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Serviços</h2>
+                <p>Soluções completas para estabelecer sua presença digital com excelência.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">🖥️</div>
+                    <h3 class="service-title">Desenvolvimento de Sites</h3>
+                    <p>Sites responsivos e otimizados para todos os dispositivos, com design moderno e funcional.</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">🛒</div>
+                    <h3 class="service-title">E-commerce</h3>
+                    <p>Lojas virtuais completas e personalizadas para vender seus produtos online com facilidade.</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">📊</div>
+                    <h3 class="service-title">SEO</h3>
+                    <p>Otimização para mecanismos de busca para aumentar sua visibilidade online e atrair mais clientes.</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">📱</div>
+                    <h3 class="service-title">Design Responsivo</h3>
+                    <p>Experiência perfeita em todos os dispositivos, do desktop ao smartphone.</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">🔒</div>
+                    <h3 class="service-title">Segurança Web</h3>
+                    <p>Proteção para seu site e dados dos clientes com certificados SSL e boas práticas de segurança.</p>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-icon">🚀</div>
+                    <h3 class="service-title">Manutenção e Suporte</h3>
+                    <p>Atualizações, monitoramento e suporte contínuo para manter seu site funcionando perfeitamente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section with real images -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nosso Portfólio</h2>
+                <p>Conheça alguns dos nossos melhores projetos e resultados entregues aos nossos clientes.</p>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&q=80" alt="Projeto de E-commerce" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>E-commerce de Moda</h3>
+                        <p>Plataforma completa com mais de 5.000 produtos e integração com gateway de pagamento.</p>
+                        <a href="#" class="btn btn-secondary">Ver Projeto</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&q=80" alt="Site Corporativo" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>Site Corporativo</h3>
+                        <p>Design moderno e profissional para uma empresa de consultoria financeira.</p>
+                        <a href="#" class="btn btn-secondary">Ver Projeto</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80" alt="Blog de Notícias" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>Portal de Notícias</h3>
+                        <p>Sistema de gerenciamento de conteúdo personalizado com área de membros.</p>
+                        <a href="#" class="btn btn-secondary">Ver Projeto</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&q=80" alt="Aplicação Web" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>Aplicação Web SaaS</h3>
+                        <p>Sistema de gerenciamento de projetos com dashboard personalizado.</p>
+                        <a href="#" class="btn btn-secondary">Ver Projeto</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80" alt="Landing Page" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>Landing Page de Conversão</h3>
+                        <p>Página otimizada que aumentou as conversões do cliente em 150%.</p>
+                        <a href="#" class="btn btn-secondary">Ver Projeto</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80" alt="Redesign de Site" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>Redesign de Site</h3>
+                        <p>Modernização completa que melhorou o tempo de carregamento em 70%.</p>
+                        <a href="#" class="btn btn-secondary">Ver Projeto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section with team image -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sobre Nós</h2>
+                <p>Conheça nossa história e o que nos motiva a criar soluções digitais excepcionais.</p>
+            </div>
+
+            <div class="about-container">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80" alt="Equipe WebEssence" class="about-img fade-in">
+                <div class="about-content fade-in">
+                    <h2>WebEssence: Excelência em Desenvolvimento Web</h2>
+                    <p>Fundada em 2020, a WebEssence nasceu da paixão por criar experiências digitais que transformam negócios. Nossa equipe de profissionais altamente qualificados combina expertise técnica com criatividade para entregar soluções que não apenas atendem, mas excedem as expectativas dos nossos clientes.</p>
+                    <p>Acreditamos que cada projeto é único e merece uma abordagem personalizada. Por isso, trabalhamos em estreita colaboração com nossos clientes para entender suas necessidades específicas e desenvolver soluções sob medida que impulsionam seus resultados.</p>
+                    <p>Nossos valores fundamentais:</p>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li>Excelência técnica e atenção aos detalhes</li>
+                        <li>Inovação contínua e acompanhamento das tendências</li>
+                        <li>Transparência e comunicação clara</li>
+                        <li>Compromisso com resultados mensuráveis</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Fale Conosco</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section with client images -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Depoimentos</h2>
+                <p>O que nossos clientes dizem sobre nossas soluções e atendimento.</p>
+            </div>
+
+            <div class="testimonial-container">
+                <div class="testimonial fade-in">
+                    <div class="testimonial-header">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80" alt="Cliente Mariana" class="testimonial-img">
+                        <div class="testimonial-author">
+                            <h4>Mariana Silva</h4>
+                            <p>CEO, Moda Express</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-content">"A WebEssence transformou completamente nosso negócio online. O e-commerce que desenvolveram superou todas as nossas expectativas, com um aumento de 200% nas vendas já no primeiro mês. O suporte e a atenção aos detalhes são impressionantes!"</p>
+                </div>
+
+                <div class="testimonial fade-in">
+                    <div class="testimonial-header">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80" alt="Cliente Carlos" class="testimonial-img">
+                        <div class="testimonial-author">
+                            <h4>Carlos Mendes</h4>
+                            <p>Diretor, Consultoria Financeira CM</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-content">"Procurávamos uma equipe que pudesse criar um site que refletisse o profissionalismo da nossa empresa. A WebEssence não só entregou um design excepcional, como também implementou estratégias de SEO que nos colocaram na primeira página do Google."</p>
+                </div>
+
+                <div class="testimonial fade-in">
+                    <div class="testimonial-header">
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80" alt="Cliente Fernanda" class="testimonial-img">
+                        <div class="testimonial-author">
+                            <h4>Fernanda Oliveira</h4>
+                            <p>Empreendedora, Café Aroma</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-content">"Como pequena empreendedora, precisava de um site que não custasse uma fortuna, mas que parecesse profissional. A WebEssence entendeu perfeitamente minhas necessidades e entregou uma solução perfeita, dentro do prazo e do orçamento."</p>
+                </div>
+
+                <div class="testimonial fade-in">
+                    <div class="testimonial-header">
+                        <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&q=80" alt="Cliente Paulo" class="testimonial-img">
+                        <div class="testimonial-author">
+                            <h4>Paulo Costa</h4>
+                            <p>CEO, Tecnologia Inovare</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-content">"A aplicação web desenvolvida pela WebEssence revolucionou a forma como gerenciamos nossos projetos internamente. A interface intuitiva e a performance excepcional demonstram o alto nível técnico da equipe. Recomendo sem reservas."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Entre em Contato</h2>
+                <p>Estamos prontos para transformar sua visão em realidade digital.</p>
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-info fade-in">
+                    <h3>Informações de Contato</h3>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-details">
+                            <h4>Telefone/WhatsApp</h4>
+                            <p><a href="tel:+5511930667000">(11) 93066-7000</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-details">
+                            <h4>E-mail</h4>
+                            <p><a href="mailto:contato@webessence.com.br">contato@webessence.com.br</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">🌐</div>
+                        <div class="contact-details">
+                            <h4>Redes Sociais</h4>
+                            <div class="footer-social" style="margin-top: 10px;">
+                                <a href="#" class="social-icon">𝕏</a>
+                                <a href="#" class="social-icon">𝕗</a>
+                                <a href="#" class="social-icon">𝕀</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form fade-in">
+                    <h3>Envie uma Mensagem</h3>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Nome" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="E-mail" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Telefone">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Mensagem" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4>WebEssence</h4>
+                    <p style="color: #bdc3c7; margin-bottom: 20px;">Transformando ideias em experiências digitais excepcionais desde 2020.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon">𝕏</a>
+                        <a href="#" class="social-icon">𝕗</a>
+                        <a href="#" class="social-icon">𝕀</a>
+                        <a href="#" class="social-icon">in</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Links Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#services">Serviços</a></li>
+                        <li><a href="#portfolio">Portfólio</a></li>
+                        <li><a href="#about">Sobre Nós</a></li>
+                        <li><a href="#testimonials">Depoimentos</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul
